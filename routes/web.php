@@ -8,12 +8,28 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('pages.coba');
+    return view('pages.dashboard',[
+        "title"=>"Dashboard"
+    ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/coba', function () {
-    return view('pages.coba');
-})->middleware(['auth', 'verified']);
+Route::get('/sensor', function () {
+    return view('pages.sensor',[
+        "title"=>"Sensor"
+    ]);
+})->middleware(['auth', 'verified'])->name('sensor');
+
+Route::get('/led', function () {
+    return view('pages.led',[
+        "title"=>"Led Control"
+    ]);
+})->middleware(['auth', 'verified'])->name('led');
+
+Route::get('/user', function () {
+    return view('pages.user',[
+        "title"=>"User"
+    ]);
+})->middleware(['auth', 'verified'])->name('user');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
