@@ -1,0 +1,38 @@
+<?php
+
+namespace App\Http\Controllers;
+use App\Models\Data;
+use App\Models\Device;
+use Illuminate\Http\Request;
+
+class DataController extends Controller
+{
+    public function index()
+    {
+        return Data::all();
+    }
+
+    public function store(Request $request)
+    {
+        $data = new Data;
+        $data-> device_id = $request -> device_id;
+        $data-> data = $request -> data;
+        $data->save();
+
+        if (Device::where('id', $request->device_id)->exists()){
+            $device = Device::find($request->device_id);
+            $device->data = $request->data;
+            $device->save();
+        }
+
+        return response()->json([
+            "message" => "Device telah ditambahkan."
+        ], 201);
+    }
+
+    public function show(string $id)
+    {
+        return Data::where('device_id',$id)->orderBy('created_at','DESC')->get();
+    }
+
+}
