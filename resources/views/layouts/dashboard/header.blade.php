@@ -8,19 +8,25 @@
                 </a>
             </div>
         </div>
-        <div class="navbar-breadcrumb">
-            <h3 class="mb-0">{{$title}}</h3>
-            {{-- <nav aria-label="breadcrumb">
-                <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Home</li>
-                </ul>
-            </nav> --}}
-        </div>
+        @isset($breadcrumbs)
+            <div class="navbar-breadcrumb">
+                <h5 class="mb-0">{{ $title ?? 'Dashboard' }}</h5>
+                <nav aria-label="breadcrumb">
+                    <ul class="breadcrumb">
+                        @foreach ($breadcrumbs as $i => $breadcrumb)
+                            @if ($i == count($breadcrumb) - 1)
+                                <li class="breadcrumb-item active" aria-current="page">{{$breadcrumb['title']}}</li>
+                            @else
+                            <li class="breadcrumb-item"><a href="{{$breadcrumb['url']}}">{{$breadcrumb['title']}}</a></li>
+                            @endif
+                        @endforeach
+                    </ul>
+                </nav>
+            </div>
+        @endisset
         <nav class="navbar navbar-expand-lg navbar-light p-0">
-            <button class="navbar-toggler" type="button" data-toggle="collapse"
-                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="ri-menu-3-line"></i>
             </button>
             <div class="iq-menu-bt align-self-center">
@@ -32,8 +38,8 @@
             </div>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto navbar-list">
-                    <li class="nav-item iq-full-screen"><a href="#" class="iq-waves-effect"
-                            id="btnFullscreen"><i class="ri-fullscreen-line"></i></a>
+                    <li class="nav-item iq-full-screen"><a href="#" class="iq-waves-effect" id="btnFullscreen"><i
+                                class="ri-fullscreen-line"></i></a>
                     </li>
                 </ul>
             </div>
@@ -81,8 +87,7 @@
                                         </div>
                                     </div>
                                 </a>
-                                <a href="privacy-setting.html"
-                                    class="iq-sub-card iq-bg-primary-secondary-hover">
+                                <a href="privacy-setting.html" class="iq-sub-card iq-bg-primary-secondary-hover">
                                     <div class="media align-items-center">
                                         <div class="rounded iq-card-icon iq-bg-secondary">
                                             <i class="ri-lock-line"></i>
@@ -94,8 +99,8 @@
                                     </div>
                                 </a>
                                 <div class="d-inline-block w-100 text-center p-3">
-                                    <a class="iq-bg-danger iq-sign-btn" href="{{ route('logout') }}"
-                                        role="button">Sign out<i class="ri-login-box-line ml-2"></i></a>
+                                    <a class="iq-bg-danger iq-sign-btn" href="{{ route('logout') }}" role="button">Sign
+                                        out<i class="ri-login-box-line ml-2"></i></a>
                                 </div>
                             </div>
                         </div>
