@@ -1,7 +1,7 @@
 <!-- Required meta tags -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title> My IoT | {{$title}} </title>
+<title> My IoT Device </title>
 <!-- Favicon -->
 <link rel="shortcut icon" href="images/logo_2.png" />
 <!-- Bootstrap CSS -->
