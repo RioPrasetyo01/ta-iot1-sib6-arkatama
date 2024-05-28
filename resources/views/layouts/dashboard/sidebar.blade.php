@@ -1,8 +1,8 @@
 <div class="iq-sidebar">
     <div class="iq-sidebar-logo d-flex justify-content-between">
         <a href="dashboard">
-            <img src="images/logo_1.png" class="img-fluid" alt="">
-            <span>My IoT Device</span>
+            <img src="images/logo_3.png" class="img-fluid" alt="">
+            <span class="p-1">My IoT</span>
         </a>
         <div class="iq-menu-bt align-self-center">
             <div class="wrapper-menu">

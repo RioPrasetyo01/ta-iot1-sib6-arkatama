@@ -6,13 +6,17 @@ use App\Http\Controllers\DeviceController;
 use App\Http\Controllers\DataController;
 use App\Http\Controllers\LedController;
 use App\Http\Controllers\StatusController;
-use App\Http\Controllers\UserController;
+// use App\Http\Controllers\UserController;
+use App\Http\Controllers\Api\UserController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::get('/users/{id}/devices', [UserController::class, 'getUserDevices']);
+Route::resource('users', UserController::class)
+    ->except(['create','edit']);
+
+// Route::get('/users/{id}/devices', [UserController::class, 'getUserDevices']);
 Route::post('/users/{id}/devices', [DeviceController::class, 'store']);
 Route::get('/devices', [DeviceController::class,'index']);
 Route::get('/devices/{id}', [DeviceController::class,'show']);

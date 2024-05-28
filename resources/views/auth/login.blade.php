@@ -9,7 +9,10 @@
                     <div class="sign-in-from">
                         <h1 class="mb-0">Sign in</h1>
                         <p>Enter your email address and password to access admin panel.</p>
-                        <form class="mt-4" action= "{{route('login')}}" method="POST">
+
+                        @include('layouts.dashboard.alerts.danger-alert')
+
+                        <form class="mt-4" action= "{{ route('login') }}" method="POST">
                             @csrf
 
                             <div class="form-group">
@@ -32,7 +35,7 @@
                             </div>
                             <div class="sign-info">
                                 <span class="dark-color d-inline-block line-height-2">Don't have an account? <a
-                                        href="{{route ('register')}}">Sign up</a></span>
+                                        href="{{ route('register') }}">Sign up</a></span>
                                 <ul class="iq-social-media">
                                     <li><a href="#"><i class="ri-facebook-box-line"></i></a></li>
                                     <li><a href="#"><i class="ri-twitter-line"></i></a></li>
