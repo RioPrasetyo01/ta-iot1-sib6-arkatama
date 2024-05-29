@@ -24,25 +24,31 @@ class LedController extends Controller
         $led->save();
 
         return response()->json([
-            "message" => "Device telah ditambahkan."
+            "message" => "Berhasil menambahkan device",
+            "data" => $led
         ], 201);
     }
 
     public function show($id)
     {
         $led = Led::findOrFail($id);
-        return response()->json($led);
+        return response()->json([
+            "message" => "Berhasil menampilkan data device",
+            "data" => $led
+        ], 201);
     }
 
     public function update(Request $request, string $id)
     {
-        $led = Device::findOrFail($id);
-        $led->device_name = $request->input('nama_led');
+        $led = Led::findOrFail($id);
+
+        $led->nama_led = $request->input('nama_led');
         $led->status = $request->input('status');
         $led->save();
 
         return response()->json([
-            "message"=> "Device telah diupdate."
+            "message"=> "Berhasil mengupdate device.",
+            "data" => $led
         ], 201);
     }
 
@@ -52,7 +58,8 @@ class LedController extends Controller
         $led->delete();
 
         return response()->json([
-            "message"=> "Device telah dihapus."
+            "message"=> "Device telah dihapus.",
+            "data" => $led
         ], 201);
     }
 }

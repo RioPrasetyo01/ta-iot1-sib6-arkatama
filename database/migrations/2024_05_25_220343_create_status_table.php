@@ -11,11 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('status', function (Blueprint $table) {
+        Schema::create('statuses', function (Blueprint $table) {
             $table->id();
-            $table->integer('led_id');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('led_id');
             $table->double('status');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('led_id')->references('id')->on('leds')->onDelete('cascade');
         });
     }
 

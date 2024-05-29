@@ -133,7 +133,7 @@ class UserController extends Controller
             $avatarPath = $avatar->store('avatars','public');
             $validated['avatar'] = $avatarPath;
         }
-        
+
         $user = User::find($id);
         $user->update($validated);
 

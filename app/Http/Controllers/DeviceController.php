@@ -23,25 +23,31 @@ class DeviceController extends Controller
         $device->save();
 
         return response()->json([
-            "message" => "Device telah ditambahkan."
+            "message" => "Berhasil menambahkan device",
+            "data" => $device
         ], 201);
     }
 
     public function show($id)
     {
         $device = Device::findOrFail($id);
-        return response()->json($device);
+        return response()->json([
+            "message" => "Berhasil menampilkan data device",
+            "data" => $device
+        ], 201);
     }
 
     public function update(Request $request, string $id)
     {
         $device = Device::findOrFail($id);
-        $device->device_name = $request->input('nama_device');
+
+        $device->nama_device = $request->input('nama_device');
         $device->value = $request->input('value');
         $device->save();
 
         return response()->json([
-            "message"=> "Device telah diupdate."
+            "message"=> "Berhasil mengupdate device.",
+            "data" => $device
         ], 201);
     }
 
@@ -51,7 +57,8 @@ class DeviceController extends Controller
         $device->delete();
 
         return response()->json([
-            "message"=> "Device telah dihapus."
+            "message"=> "Device telah dihapus.",
+            "data" => $device
         ], 201);
     }
 }

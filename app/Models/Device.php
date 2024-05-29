@@ -15,4 +15,9 @@ class Device extends Model
     {
         return $this->belongsTo(User::class);
     }
+    
+    public function data()
+    {
+    return $this->hasMany(Data::class);
+    }
 }

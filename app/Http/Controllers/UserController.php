@@ -12,7 +12,21 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $devices = $user->devices; // Mengambil semua devices dari user tersebut
 
-        return response()->json($devices);
+        return response()->json([
+            "message" => "Berhasil menampilkan semua device",
+            "data" => $devices
+        ], 201);
+    }
+
+    public function getUserLeds($id)
+    {
+        $user = User::findOrFail($id);
+        $leds = $user->leds; // Mengambil semua devices dari user tersebut
+
+        return response()->json([
+            "message" => "Berhasil menampilkan semua device",
+            "data" => $leds
+        ], 201);
     }
 
     function index(){

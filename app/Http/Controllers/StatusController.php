@@ -15,23 +15,55 @@ class StatusController extends Controller
     public function store(Request $request)
     {
         $status = new Status;
-        $status-> led_id = $request -> led_id;
-        $status-> status = $request -> status;
+        $status->user_id = $request->input('user_id');
+        $status->led_id = $request->input('led_id');
+        $status->status = $request->input('status');
         $status->save();
 
-        if (Led::where('id', $request->led_id)->exists()){
-            $led = Led::find($request->led_id);
-            $led->status = $request->status;
-            $led->save();
-        }
+        // if (Led::where('id', $request->led_id)->exists()){
+        //     $led = Led::find($request->led_id);
+        //     $led->status = $request->status;
+        //     $led->save();
+        // }
 
         return response()->json([
-            "message" => "Device telah ditambahkan."
+            "message" => "Berhasil menambahkan data",
+            "data" => $status
         ], 201);
     }
 
     public function show(string $id)
     {
-        return Status::where('led_id',$id)->orderBy('created_at','DESC')->get();
+        $status = Status::findOrFail($id);
+
+        return response()->json([
+            "message" => "Berhasil menampilkan data",
+            "data" => $status
+        ], 201);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $status = Status::findOrFail($id);
+        $status->user_id = $request->input('user_id');
+        $status->device_id = $request->input('led_id');
+        $status->status = $request->input('status');
+        $status->save();
+
+        return response()->json([
+            "message" => "Berhasil mengupdate data",
+            "data" => $status
+        ], 201);
+    }
+
+    public function destroy($id)
+    {
+        $status = Status::findOrFail($id);
+        $status->delete();
+
+        return response()->json([
+            "message" => "Berhasil menghapus data",
+            "data" => $status
+        ], 201);
     }
 }

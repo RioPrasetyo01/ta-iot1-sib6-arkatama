@@ -14,25 +14,38 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::resource('users', UserController::class)
-    ->except(['create','edit']);
+->except(['create','edit']);
 
 // Route::get('/users/{id}/devices', [UserController::class, 'getUserDevices']);
 Route::post('/users/{id}/devices', [DeviceController::class, 'store']);
-Route::get('/devices', [DeviceController::class,'index']);
-Route::get('/devices/{id}', [DeviceController::class,'show']);
-Route::put('/devices/{id}', [DeviceController::class,'update']);
-Route::delete('/devices/{id}', [DeviceController::class,'destroy']);
 
-Route::post('/data', [DataController::class, 'store']);
-Route::get('/data', [DataController::class, 'index']);
-Route::get('/data/{id}', [DataController::class, 'show']);
+Route::prefix('/devices')->name('devices')->group(function(){
+    Route::get('/', [DeviceController::class, 'index'])->name('get');
+    Route::get('/{id}', [DeviceController::class, 'show'])->name('details');
+    Route::put('/{id}', [DeviceController::class, 'update'])->name('update');
+    Route::delete('/{id}', [DeviceController::class, 'destroy'])->name('delete');
+});
 
+// Route::get('/users/{id}/leds', [UserController::class, 'getUserLeds']);
 Route::post('/users/{id}/leds', [LedController::class, 'store']);
-Route::get('/leds', [LedController::class,'index']);
-Route::get('/leds/{id}', [LedController::class,'show']);
-Route::put('/leds/{id}', [LedController::class,'update']);
-Route::delete('/leds/{id}', [LedController::class,'destroy']);
 
-Route::post('/status', [StatusController::class, 'store']);
-Route::get('/status', [StatusController::class, 'index']);
-Route::get('/status/{id}', [StatusController::class, 'show']);
+Route::prefix('/leds')->name('leds')->group(function(){
+    Route::get('/', [LedController::class, 'index'])->name('get');
+    Route::get('/{id}', [LedController::class, 'show'])->name('details');
+    Route::put('/{id}', [LedController::class, 'update'])->name('update');
+    Route::delete('/{id}', [LedController::class, 'destroy'])->name('delete');
+});
+
+Route::prefix('/data')->name('data')->group(function(){
+    Route::post('/', [DataController::class, 'store'])->name('store');
+    Route::get('/{id}', [DataController::class, 'show'])->name('details');
+    Route::put('/{id}', [DataController::class, 'update'])->name('update');
+    Route::delete('/{id}', [DataController::class, 'destroy'])->name('delete');
+});
+
+Route::prefix('/status')->name('status')->group(function(){
+    Route::post('/', [StatusController::class, 'store'])->name('store');
+    Route::get('/{id}', [StatusController::class, 'show'])->name('details');
+    Route::put('/{id}', [StatusController::class, 'update'])->name('update');
+    Route::delete('/{id}', [StatusController::class, 'destroy'])->name('delete');
+});
