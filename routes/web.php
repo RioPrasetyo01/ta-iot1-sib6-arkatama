@@ -2,7 +2,11 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\LedController;
+use App\Http\Controllers\DataController;
+use App\Http\Controllers\DeviceController;
 use Illuminate\Support\Facades\Route;
+use App\Service\WhatsappNotificationService;
 
 Route::get('/', function () {
     return view('layouts.landing');
@@ -17,30 +21,32 @@ Route::get('/dashboard', function () {
     return view('pages.dashboard',$data);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/sensor', function () {
-    return view('pages.sensor',[
-        "title"=>"Sensor"
-    ]);
-})->middleware(['auth', 'verified'])->name('sensor');
+Route::controller(LedController::class)->group(function () {
+    Route::get('/leds', 'webIndex')->name('led.index');
+    Route::post('/leds/{id}/status', 'webStore')->name('led.store');
+});
 
-Route::get('/led', function () {
-    return view('pages.led',[
-        "title"=>"Led Control"
-    ]);
-})->middleware(['auth', 'verified'])->name('led');
+Route::get('/sensor', [DataController::class, 'web_index'])->middleware(['auth', 'verified'])->name('sensor.index');
 
-// Route::get('/user', function () {
-//     return view('pages.user.index',[
-//         "title"=>"User"
-//     ]);
-// })->middleware(['auth', 'verified'])->name('user');
+
+Route::get('/data/{deviceId}', [DataController::class, 'getChartData']);
+Route::get('/leds/{Id}', [LedController::class, 'getChartData']);
+Route::get('/data', [DataController::class, 'showCharts']);
+Route::get('/devices', [DataController::class, 'showDevices']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::get('/users', [UserController::class, 'webIndex'])->name('users.index');
+
+    // Route::get('/whatsapp', function () {
+    //     $target = request('target');
+    //     $message = 'Ada kebocoran gas di rumah anda, segera cek dan perbaiki';
+    //     $response = WhatsappNotificationService::sendMessage($target, $message);
+    //     echo $response;
+    // });
 });
 
 

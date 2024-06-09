@@ -20,7 +20,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'avatar'
+        'avatar',
+        'role',
+        'phone_number',
     ];
 
     /**
@@ -48,25 +50,5 @@ class User extends Authenticatable
 
     public function getAvatarAttribute($value){
         return url('storage/'.$value);
-    }
-
-    public function devices()
-    {
-        return $this->hasMany(Device::class);
-    }
-
-    public function data()
-    {
-        return $this->hasMany(Data::class);
-    }
-
-    public function leds()
-    {
-        return $this->hasMany(Led::class);
-    }
-
-    public function status()
-    {
-        return $this->hasMany(Status::class);
     }
 }

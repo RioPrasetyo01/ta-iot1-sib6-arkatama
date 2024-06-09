@@ -12,7 +12,6 @@
 
     <!-- Wrapper Start -->
     <div class="wrapper">
-        
         <!-- Sidebar  -->
         @include('layouts.dashboard.sidebar')
 
@@ -35,6 +34,8 @@
 
     <!-- Optional JavaScript -->
     @include('layouts.dashboard._foot')
+
+    @stack('scripts')
 </body>
 
 </html>

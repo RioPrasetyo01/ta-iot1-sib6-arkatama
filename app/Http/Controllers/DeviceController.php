@@ -12,13 +12,10 @@ class DeviceController extends Controller
         return Device::all();
     }
 
-    public function store(Request $request, $userId)
+    public function store(Request $request)
     {
-        $user = User::findOrFail($userId);
-
         $device = new Device;
         $device->nama_device = $request->nama_device;
-        $device->user_id = $user->id;
         $device->value = $request->value;
         $device->save();
 

@@ -15,16 +15,15 @@ class StatusController extends Controller
     public function store(Request $request)
     {
         $status = new Status;
-        $status->user_id = $request->input('user_id');
         $status->led_id = $request->input('led_id');
         $status->status = $request->input('status');
         $status->save();
 
-        // if (Led::where('id', $request->led_id)->exists()){
-        //     $led = Led::find($request->led_id);
-        //     $led->status = $request->status;
-        //     $led->save();
-        // }
+        if (Led::where('id', $request->led_id)->exists()){
+            $led = Led::find($request->led_id);
+            $led->status = $request->status;
+            $led->save();
+        }
 
         return response()->json([
             "message" => "Berhasil menambahkan data",
@@ -45,7 +44,6 @@ class StatusController extends Controller
     public function update(Request $request, $id)
     {
         $status = Status::findOrFail($id);
-        $status->user_id = $request->input('user_id');
         $status->device_id = $request->input('led_id');
         $status->status = $request->input('status');
         $status->save();

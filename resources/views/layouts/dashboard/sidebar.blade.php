@@ -2,7 +2,7 @@
     <div class="iq-sidebar-logo d-flex justify-content-between">
         <a href="dashboard">
             <img src="images/logo_3.png" class="img-fluid" alt="">
-            <span class="p-1">My IoT</span>
+            <span>My IoT</span>
         </a>
         <div class="iq-menu-bt align-self-center">
             <div class="wrapper-menu">
@@ -23,26 +23,27 @@
                         <i class="ri-home-4-line"></i><span>Dashboard</span></a>
                 </li>
                 <li class="
-                @if (request()->url()==route('sensor'))
+                @if (request()->url()==route('sensor.index'))
                     active
                 @endif">
                     <a href="sensor" class="iq-waves-effect collapsed">
                         <i class="ri-sensor-line"></i><span>Sensor</span></a>
                 </li>
                 <li  class="
-                @if (request()->url()==route('led'))
+                @if (request()->url()==route('led.index'))
                     active
                 @endif">
-                    <a href="led" class="iq-waves-effect">
+                    <a href="{{route('led.index')}}" class="iq-waves-effect">
                         <i class="ri-lightbulb-line"></i><span>LED Control</span></a>
                 </li>
-                <li class="
-                @if (request()->url()==route('users.index'))
-                    active
-                @endif">
-                    <a href="users" class="iq-waves-effect collapsed">
-                        <i class="ri-user-line"></i><span>Users</span></a>
-                </li>
+                @if (auth()->user()->role == 'admin')
+                    <li class="
+                @if (request()->url() == route('users.index')) active @endif
+                ">
+                        <a href="{{ route('users.index') }}" class="iq-waves-effect"><i
+                                class="ri-user-line"></i><span>Users</span></a>
+                    </li>
+                @endif
             </ul>
         </nav>
         <div class="p-3"></div>
