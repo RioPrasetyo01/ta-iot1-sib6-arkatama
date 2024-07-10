@@ -29,21 +29,19 @@
                     <a href="sensor" class="iq-waves-effect collapsed">
                         <i class="ri-sensor-line"></i><span>Sensor</span></a>
                 </li>
-                <li  class="
+<!--                 <li  class="
                 @if (request()->url()==route('led.index'))
                     active
                 @endif">
                     <a href="{{route('led.index')}}" class="iq-waves-effect">
                         <i class="ri-lightbulb-line"></i><span>LED Control</span></a>
-                </li>
-                @if (auth()->user()->role == 'admin')
+                </li> -->
                     <li class="
                 @if (request()->url() == route('users.index')) active @endif
                 ">
                         <a href="{{ route('users.index') }}" class="iq-waves-effect"><i
                                 class="ri-user-line"></i><span>Users</span></a>
                     </li>
-                @endif
             </ul>
         </nav>
         <div class="p-3"></div>
