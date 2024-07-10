@@ -350,6 +350,7 @@
 
                     // tampilkan modal editModal
                     $('#editModal').modal('show');
+                    
                 })
                 .fail((error) => {
                     // tampilkan pesan error
