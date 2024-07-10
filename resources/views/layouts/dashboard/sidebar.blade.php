@@ -29,12 +29,6 @@
                     <a href="sensor" class="iq-waves-effect collapsed">
                         <i class="ri-sensor-line"></i><span>Sensor</span></a>
                 </li>
-                    <li class="
-                @if (request()->url() == route('users.index')) active @endif
-                ">
-                        <a href="{{ route('users.index') }}" class="iq-waves-effect"><i
-                                class="ri-user-line"></i><span>Users</span></a>
-                    </li>
             </ul>
         </nav>
         <div class="p-3"></div>
